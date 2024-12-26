@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\TarefaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,5 +18,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('categorias', CategoriaController::class);
+//     Resource routes:
+//     GET /posts (index method)
+//     GET /posts/create (create method)
+//     POST /posts (store method)
+//     GET /posts/{post} (show method)
+//     GET /posts/{post}/edit (edit method)
+//     PUT/PATCH /posts/{post} (update method)
+//     DELETE /posts/{post} (destroy method)
+Route::resource('tarefas', TarefaController::class);
 
 require __DIR__.'/auth.php';
