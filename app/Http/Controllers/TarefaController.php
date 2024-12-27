@@ -99,4 +99,15 @@ class TarefaController extends Controller
         $tarefa->delete();
         return redirect()->route('tarefas.index');
     }
+
+    // Marca uma tarefa como completa no banco
+    public function concluir(Tarefa $tarefa)
+    {
+        // Atualiza o campo 'concluida' para true
+        $tarefa->completa = true;
+        $tarefa->save();
+
+        // Redireciona para a lista de tarefas com uma mensagem de sucesso
+        return redirect()->route('tarefas.index')->with('success', 'Tarefa concluída com sucesso!');
+    }
 }

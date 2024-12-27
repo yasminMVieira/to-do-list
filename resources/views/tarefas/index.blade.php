@@ -45,6 +45,7 @@
                 <table class="min-w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-lg">
                     <thead>
                         <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            <th class="px-4 py-2 text-center"></th>
                             <th class="px-4 py-2 text-center">ID</th>
                             <th class="px-4 py-2 text-center">Título</th>
                             <th class="px-4 py-2 text-center">Descrição</th>
@@ -56,16 +57,33 @@
                     <tbody>
                         @foreach($tarefas as $tarefa)
                             <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="px-4 py-2 text-center">
+                                    <!-- Botão para marcar como concluída -->
+                                    @if(!$tarefa->completa)
+                                        <form action="{{ route('tarefas.concluir', $tarefa) }}" method="POST" class="inline">
+                                            @csrf                                          
+                                            <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                                Concluir
+                                        </form>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->id }}</td>
                                 <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->titulo }}</td>
                                 <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->descricao }}</td>
                                 <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->categoria->nome }}</td>
-                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->concluida ? 'Concluída' : 'Pendente' }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">
+                                    @if($tarefa->completa)
+                                        <span class="text-green-500">Concluída</span>
+                                    @else
+                                        <span class="text-red-500">Pendente</span>
+                                    @endif
+                                </td>                                
                                 <td class="px-4 py-2 text-center">
                                     <div class="flex justify-center items-center gap-2">
                                         <a href="{{ route('tarefas.edit', $tarefa) }}" class="px-3 py-1 bg-yellow-500 text-white rounded-md text-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">
                                             Editar
                                         </a>
+                                
                                         <form action="{{ route('tarefas.destroy', $tarefa) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?')">
                                             @csrf
                                             @method('DELETE')

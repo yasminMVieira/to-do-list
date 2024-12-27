@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
 //     DELETE /posts/{post} (destroy method)
 Route::resource('categorias', CategoriaController::class);
 Route::resource('tarefas', TarefaController::class);
+Route::post('/tarefas/{tarefa}/concluir', [TarefaController::class, 'concluir'])->name('tarefas.concluir');
+
 
 require __DIR__.'/auth.php';
