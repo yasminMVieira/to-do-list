@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\TarefaController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
@@ -19,8 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('categorias', CategoriaController::class);
-//     Resource routes:
+//     define automaticamente todas as rotas necessárias para um CRUD (index, create, store, edit, update, destroy).
+//     Resource routes: 
 //     GET /posts (index method)
 //     GET /posts/create (create method)
 //     POST /posts (store method)
@@ -28,6 +28,7 @@ Route::resource('categorias', CategoriaController::class);
 //     GET /posts/{post}/edit (edit method)
 //     PUT/PATCH /posts/{post} (update method)
 //     DELETE /posts/{post} (destroy method)
+Route::resource('categorias', CategoriaController::class);
 Route::resource('tarefas', TarefaController::class);
 
 require __DIR__.'/auth.php';

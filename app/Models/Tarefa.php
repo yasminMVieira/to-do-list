@@ -10,7 +10,7 @@ class Tarefa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'titulo', 'decricao', 'completa', 'categoria_id'
+        'titulo', 'descricao', 'completa', 'categoria_id'
     ];
 
     // Relacionamento muitos-para-muitos com os usuários
@@ -20,8 +20,8 @@ class Tarefa extends Model
     }
 
     // Relacionamento muitos-para-um com a categoria
-    public function category()
+    public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 }

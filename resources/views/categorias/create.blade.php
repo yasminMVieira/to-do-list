@@ -1,0 +1,32 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Criar Categoria
+        </h2>
+    </x-slot>
+
+    <div class="container mx-auto p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Criar Categoria</h1>
+
+        <!-- Formulário -->
+        <form action="{{ route('categorias.store') }}" method="POST">
+            @csrf
+
+            <!-- Nome da Categoria -->
+            <div class="mb-4">
+                <label for="nome" class="block text-gray-700 dark:text-gray-200 font-medium">Nome</label>
+                <input type="text" name="nome" id="nome" class="mt-2 block w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+            </div>
+
+            <!-- Botões -->
+            <div class="flex justify-between">
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Salvar
+                </button>
+                <a href="{{ route('categorias.index') }}" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</x-app-layout>

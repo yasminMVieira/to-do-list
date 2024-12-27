@@ -16,7 +16,7 @@ class Categoria extends Model
     // Relacionamento um-para-muitos com tarefas
     public function tasks()
     {
-        return $this->hasMany(Tarefa::class);
+        return $this->hasMany(Tarefa::class, 'categoria_id');
     }
 
     // Relacionamento um-para-muitos com usuários (categoria pertence a um usuário)

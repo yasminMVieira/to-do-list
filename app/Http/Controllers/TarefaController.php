@@ -12,8 +12,8 @@ class TarefaController extends Controller
     // Exibe todas as tarefas
     public function index()
     {
-        $tarefas = Tarefa::where('user_id', auth()->id())->get();
-        return view('tarefas.index', compact('tarefas'));
+        $tarefas = Tarefa::with('categoria')->get();  // Carrega as tarefas com suas categorias associadas
+        return view('tarefas.index', compact('tarefas'));  // Passa a variável $tarefas para a view
     }
 
     // Mostra o formulário para criar uma nova tarefa
@@ -35,8 +35,7 @@ class TarefaController extends Controller
         Tarefa::create([
             'titulo' => $request->titulo,
             'descricao' => $request->descricao,
-            'categoria_id' => $request->categoria_id,
-            'user_id' => auth()->id(),
+            'categoria_id' => $request->categoria_id
         ]);
 
         return redirect()->route('tarefas.index');
