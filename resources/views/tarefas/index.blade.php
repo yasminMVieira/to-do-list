@@ -8,9 +8,33 @@
     <div class='py-12'>
 
         <div class="container max-w-7xl mx-auto p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
-            <!-- Título e Botão Criar -->
-            <div class="flex justify-end items-center mb-6">
-                
+            <!-- Filtro e Botão Criar -->
+            <div class="flex justify-between items-center mb-6">
+                <form method="GET" action="{{ route('tarefas.index') }}" class="space-x-4 mb-6">
+                    <!-- Filtro por Categoria -->
+                    <div class="inline-block">
+                        <label for="categoria_id" class="text-gray-700 dark:text-gray-200">Categoria</label>
+                        <select name="categoria_id" id="categoria_id" class="mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="">Selecione a categoria</option>
+                            @foreach($categorias as $categoria)
+                                <option value="{{ $categoria->id }}" {{ request('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                    {{ $categoria->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+    
+                    <!-- Filtro por Concluídas -->
+                    <div class="inline-block">
+                        <label for="concluida" class="text-gray-700 dark:text-gray-200">Mostrar Concluídas</label>
+                        <input type="checkbox" name="concluida" id="concluida" {{ request('concluida') ? 'checked' : '' }} class="ml-2">
+                    </div>
+    
+                    <!-- Botão de Filtro -->
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Filtrar
+                    </button>
+                </form>
                 <a href="{{ route('tarefas.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Criar Nova Tarefa
                 </a>
@@ -21,20 +45,22 @@
                 <table class="min-w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-lg">
                     <thead>
                         <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                            <th class="px-4 py-2 text-left">ID</th>
-                            <th class="px-4 py-2 text-left">Título</th>
-                            <th class="px-4 py-2 text-left">Descrição</th>
-                            <th class="px-4 py-2 text-left">Categoria</th>
+                            <th class="px-4 py-2 text-center">ID</th>
+                            <th class="px-4 py-2 text-center">Título</th>
+                            <th class="px-4 py-2 text-center">Descrição</th>
+                            <th class="px-4 py-2 text-center">Categoria</th>
+                            <th class="px-4 py-2 text-center">Status</th>
                             <th class="px-4 py-2 text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($tarefas as $tarefa)
                             <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $tarefa->id }}</td>
-                                <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $tarefa->titulo }}</td>
-                                <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $tarefa->descricao }}</td>
-                                <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $tarefa->categoria->nome }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->id }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->titulo }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->descricao }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->categoria->nome }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $tarefa->concluida ? 'Concluída' : 'Pendente' }}</td>
                                 <td class="px-4 py-2 text-center">
                                     <div class="flex justify-center items-center gap-2">
                                         <a href="{{ route('tarefas.edit', $tarefa) }}" class="px-3 py-1 bg-yellow-500 text-white rounded-md text-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">

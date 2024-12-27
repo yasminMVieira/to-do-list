@@ -21,16 +21,16 @@
                 <table class="min-w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-lg">
                     <thead>
                         <tr class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                            <th class="px-4 py-2 text-left">ID</th>
-                            <th class="px-4 py-2 text-left">Nome</th>
+                            <th class="px-4 py-2 text-center">ID</th>
+                            <th class="px-4 py-2 text-center">Nome</th>
                             <th class="px-4 py-2 text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($categorias as $categoria)
                             <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $categoria->id }}</td>
-                                <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $categoria->nome }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $categoria->id }}</td>
+                                <td class="px-4 py-2 text-gray-800 text-center dark:text-gray-200">{{ $categoria->nome }}</td>
                                 <td class="px-4 py-2 text-center">
                                     <div class="flex justify-center items-center gap-2">
                                         <a href="{{ route('categorias.edit', $categoria) }}" class="px-3 py-1 bg-yellow-500 text-white rounded-md text-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">

@@ -10,10 +10,31 @@ use App\Models\Categoria;
 class TarefaController extends Controller
 {
     // Exibe todas as tarefas
-    public function index()
+    public function index(Request $request)
     {
-        $tarefas = Tarefa::with('categoria')->get();  // Carrega as tarefas com suas categorias associadas
-        return view('tarefas.index', compact('tarefas'));  // Passa a variável $tarefas para a view
+        $query = Tarefa::query();
+
+        // Filtro por categoria
+        if ($request->has('categoria_id') && $request->categoria_id) {
+            $query->where('categoria_id', $request->categoria_id);
+        }
+
+        // Filtro por tarefas concluídas
+        if ($request->has('concluida')) {
+            $query->where('completa', true);
+        }
+
+        // Obter as tarefas com os filtros aplicados
+        $tarefas = $query->get();
+
+        // Obter todas as categorias para o filtro
+        $categorias = Categoria::all();
+
+        // Passar as tarefas e categorias para a view
+        return view('tarefas.index', compact('tarefas', 'categorias'));
+
+        // $tarefas = Tarefa::with('categoria')->get();  // Carrega as tarefas com suas categorias associadas
+        // return view('tarefas.index', compact('tarefas'));  // Passa a variável $tarefas para a view
     }
 
     // Mostra o formulário para criar uma nova tarefa
