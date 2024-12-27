@@ -10,13 +10,13 @@ class Tarefa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'titulo', 'descricao', 'completa', 'categoria_id'
+        'titulo', 'descricao', 'completa', 'categoria_id', 'user_id'
     ];
 
     // Relacionamento muitos-para-muitos com os usuários
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class, 'task_user');
+        return $this->belongsTo(User::class);
     }
 
     // Relacionamento muitos-para-um com a categoria

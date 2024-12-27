@@ -24,6 +24,9 @@ class TarefaController extends Controller
             $query->where('completa', true);
         }
 
+        // Tarefas do usuario logado 
+        $query->where('user_id', auth()->id());
+
         // Obter as tarefas com os filtros aplicados
         $tarefas = $query->get();
 
@@ -47,19 +50,18 @@ class TarefaController extends Controller
     // Armazena uma nova tarefa
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'titulo' => 'required|string|max:255',
             'descricao' => 'required|string',
             'categoria_id' => 'required|exists:categorias,id',
         ]);
 
-        Tarefa::create([
-            'titulo' => $request->titulo,
-            'descricao' => $request->descricao,
-            'categoria_id' => $request->categoria_id
-        ]);
+        // atribuir ao usuário logado
+        $validated['user_id'] = auth()->id();
+                
+        Tarefa::create($validated);
 
-        return redirect()->route('tarefas.index');
+        return redirect()->route('tarefas.index')->with('success', 'Tarefa criada com sucesso!');
     }
 
     // Mostra os detalhes de uma tarefa

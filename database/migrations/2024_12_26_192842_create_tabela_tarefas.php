@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descricao');
             $table->boolean('completa')->default(false);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relacionamento com o usuário
             $table->foreignId('categoria_id')->constrained()->onDelete('cascade'); // Relacionamento com a categoria
         });
     }
