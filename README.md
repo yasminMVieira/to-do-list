@@ -9,7 +9,7 @@ Certifique-se de ter os seguintes itens instalados:
 - PHP >= 8.1
 - Composer
 - Node.js (para compilar os assets)
-- Banco de Dados (MariaDB ou PostgreSQL)
+- Banco de Dados (usei PostgreSQL)
 
 ## Instalação
 
@@ -32,6 +32,7 @@ Certifique-se de ter os seguintes itens instalados:
 
 4. Configure o arquivo `.env`:
    - Configure as variáveis de ambiente do banco de dados e outras configurações necessárias no arquivo `.env`.
+   - Existe o .env.example
 
 5. Gere a chave da aplicação:
    ```bash
