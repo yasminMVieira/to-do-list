@@ -58,6 +58,9 @@ Certifique-se de ter os seguintes itens instalados:
 ## Funcionalidades Principais
 
 - **Autenticação**: Usuários podem registrar-se e fazer login para acessar o sistema.
+- **CRUD de Categorias**:
+  - Criar novas categorias, especificando nome.
+  - Editar e excluir categorias existentes.
 - **CRUD de Tarefas**:
   - Criar novas tarefas, especificando título, descrição e categoria.
   - Editar e excluir tarefas existentes.
@@ -65,4 +68,5 @@ Certifique-se de ter os seguintes itens instalados:
 - **Filtros**:
   - Filtrar tarefas por categoria.
   - Exibir apenas tarefas concluídas.
-
+- **Deletar Tarefas Automaticamente**:
+  - Após uma semana marcada como concluída, a tarefa é excluida do BD.
