@@ -70,3 +70,10 @@ Certifique-se de ter os seguintes itens instalados:
   - Exibir apenas tarefas concluídas.
 - **Deletar Tarefas Automaticamente**:
   - Após uma semana marcada como concluída, a tarefa é excluida do BD.
+
+## Telas
+![image](https://github.com/user-attachments/assets/7f2178a8-79ec-464a-9905-026f337f1230)
+![image](https://github.com/user-attachments/assets/3a714270-ebea-40a1-8958-13b7174f38f2)
+![image](https://github.com/user-attachments/assets/42b45949-fe1d-41ea-bc13-4a6a275d1219)
+
+
